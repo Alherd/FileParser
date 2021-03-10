@@ -45,12 +45,12 @@ list of webpages with most unique page views also ordered
 
 ## How to install section
 
-To install section you need to write at console
+To install section you should write in main folder in console
      `bundle install`
 
 ## How to run app
 
-To run app you should write at console
+To run app you should write in main folder in console
      `ruby parser.rb resources/webserver.log`
 
 ## How to run specs
