@@ -3,6 +3,6 @@
 # This class defines type of string output
 class Display
   def self.output(string)
-
+    puts string
   end
 end
