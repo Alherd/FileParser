@@ -18,7 +18,7 @@ class ConsoleDisplay
 
   def build_string_to_output
     output = "\n#{header}\n"
-    page_views_array.each { |page, visits| output += "#{page} #{visits} #{description} \n" }
+    page_views_array.each { |page, views_quantity| output += "#{page} #{views_quantity} #{description} \n" }
 
     output
   end

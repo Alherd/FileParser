@@ -7,7 +7,7 @@ require './lib/page_views_sorter'
 require './lib/console_display'
 
 # This class manages process of parsing and output file
-class Manager
+class LogManager
   attr_reader :file_path, :entries_loader, :entries_parser, :page_views_sorter
 
   FILE_PATH_INDEX = 0

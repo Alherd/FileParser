@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require './lib/manager'
+require './lib/log_manager'
 
 describe 'Integration test' do
   let(:test_log_path) { 'spec/fixtures/test.log' }
@@ -14,13 +14,13 @@ describe 'Integration test' do
     "/help_page/1 5 unique views \n/home 3 unique views \n/index 3 unique views \n" \
     "/about/2 2 unique views \n/about 2 unique views \n/contact 2 unique views \n"
   end
-  let(:manager) { Manager.new([test_log_path]) }
+  let(:log_manager) { LogManager.new([test_log_path]) }
 
   it 'checks output page visits' do
-    expect { manager.show_page_visits }.to output(result_page_visits).to_stdout
+    expect { log_manager.show_page_visits }.to output(result_page_visits).to_stdout
   end
 
   it 'checks output page unique views' do
-    expect { manager.show_pages_uniq_views }.to output(result_page_uniq_views).to_stdout
+    expect { log_manager.show_pages_uniq_views }.to output(result_page_uniq_views).to_stdout
   end
 end
