@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require './lib/data_structure'
+require './lib/log_entry'
 
 # This class parses array of entries to array with visits
 class Parser
@@ -11,8 +11,8 @@ class Parser
     @visits = []
   end
 
-  def parse(array, parse_type)
-    load_visits(array) if @visits.empty?
+  def parse(entries, parse_type)
+    load_visits(entries) if @visits.empty?
     visits_grouped_by_urls ||= group_visits_by_urls
 
     map_visits_by_parse_type(visits_grouped_by_urls, parse_type)
@@ -20,13 +20,13 @@ class Parser
 
   private
 
-  def load_visits(array)
-    array.each do |entry|
+  def load_visits(entries)
+    entries.each do |entry|
       splitted_string = entry.split(' ')
       next unless splitted_string.count == 2
 
       url, ip = splitted_string
-      @visits << DataStructure.new(url: url, ip: ip)
+      @visits << LogEntry.new(url: url, ip: ip)
     end
   end
 

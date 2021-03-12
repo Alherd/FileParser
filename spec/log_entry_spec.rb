@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require './lib/data_structure'
+require './lib/log_entry'
 
-describe DataStructure do
+describe LogEntry do
   it 'checks url field of data structure' do
     data_structure = described_class.new(url: '/page', ip: '0.0.0.0')
 

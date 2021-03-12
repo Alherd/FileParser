@@ -4,12 +4,11 @@ require './lib/validator'
 require './lib/loader'
 require './lib/parser'
 require './lib/sorter'
-require './lib/string_builder'
 require './lib/display'
 
 # This class manages process of parsing and output file
 class Manager
-  attr_reader :file_path, :loader, :parser, :sorter, :string_builder
+  attr_reader :file_path, :loader, :parser, :sorter
 
   FILE_PATH_INDEX = 0
   PAGE_VISITS_HEADER = 'List of webpages with most page views ordered from most pages views to less page views'
@@ -20,7 +19,6 @@ class Manager
     @loader = Loader.new
     @parser = Parser.new
     @sorter = Sorter.new
-    @string_builder = StringBuilder.new
   end
 
   def show_page_visits
@@ -34,11 +32,10 @@ class Manager
   private
 
   def handle(parse_type, header)
-    enumerator = loader.load(file_path)
-    parsed_array = parser.parse(enumerator, parse_type)
-    sorted_array = sorter.sort(parsed_array)
-    string_for_output = string_builder.build(header: header, array: sorted_array, description: parse_type)
+    log_entries_enumerator = loader.load_entries_into_enumerator(file_path)
+    parsed_log_entries_by_views = parser.parse(log_entries_enumerator, parse_type)
+    sorted_log_entries_by_views = sorter.sort(parsed_log_entries_by_views)
 
-    Display.output(string_for_output)
+    Display.new(header: header, array: sorted_log_entries_by_views, description: parse_type).output
   end
 end

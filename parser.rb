@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require './lib/manager.rb'
+require './lib/manager'
 
 manager = Manager.new(ARGV)
 
