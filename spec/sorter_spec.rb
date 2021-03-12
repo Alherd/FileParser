@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require './lib/sorter'
+require './lib/page_views_sorter'
 
-describe Sorter do
+describe PageViewsSorter do
   let(:initial_array) do
     [['/help_page/1', 80], ['/contact', 89], ['/home', 78], ['/about/2', 90], ['/index', 82], ['/about', 81]]
   end

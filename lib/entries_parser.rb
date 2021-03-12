@@ -3,7 +3,7 @@
 require './lib/log_entry'
 
 # This class parses array of entries to array with visits
-class Parser
+class EntriesParser
   PAGE_VISITS = 'visits'
   PAGE_UNIQ_VIEWS = 'unique views'
 

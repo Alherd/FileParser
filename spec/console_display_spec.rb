@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require './lib/display'
-require 'pry'
+require './lib/console_display'
 
-describe Display do
+describe ConsoleDisplay do
   let(:output_string) { 'test output string' }
   let(:array) { [['/about/2', 30], ['/contact', 20], ['/index', 10]] }
   let(:header) { 'Sum visits' }
@@ -14,22 +13,22 @@ describe Display do
   let(:string_with_description) { "\nSum visits\n/about/2 30  \n/contact 20  \n/index 10  \n" }
 
   it 'checks correct display output at console' do
-    expect { described_class.new(header: header, array: array, description: description).output }
+    expect { described_class.new(header: header, page_views_array: array, description: description).output }
       .to output(expected_string).to_stdout
   end
 
   it 'checks result with empty header' do
-    expect { described_class.new(header: '', array: array, description: description).output }
+    expect { described_class.new(header: '', page_views_array: array, description: description).output }
       .to output(string_with_empty_header).to_stdout
   end
 
   it 'checks result with empty array' do
-    expect { described_class.new(header: header, array: [], description: description).output }
+    expect { described_class.new(header: header, page_views_array: [], description: description).output }
       .to output(string_with_empty_array).to_stdout
   end
 
   it 'checks result with empty description' do
-    expect { described_class.new(header: header, array: array, description: '').output }
+    expect { described_class.new(header: header, page_views_array: array, description: '').output }
       .to output(string_with_description).to_stdout
   end
 end

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require './lib/parser'
+require './lib/entries_parser'
 
-describe Parser do # rubocop:disable Metrics/BlockLength
+describe EntriesParser do # rubocop:disable Metrics/BlockLength
   let(:initial_enumerator) do
     ['/help_page/1 126.318.035.038', '/contact 184.123.665.067', '/home 184.123.665.067',
      '/about/2 444.701.448.104', '/help_page/1 929.398.951.889', '/index 444.701.448.104',
@@ -20,25 +20,25 @@ describe Parser do # rubocop:disable Metrics/BlockLength
   end
 
   it 'checks correct page visits' do
-    parsed_array = subject.parse(initial_enumerator, Parser::PAGE_VISITS)
+    parsed_array = subject.parse(initial_enumerator, EntriesParser::PAGE_VISITS)
 
     expect(parsed_array).to eq(expected_parsed_array_page_visits)
   end
 
   it 'checks correct page unique views' do
-    parsed_array = subject.parse(initial_enumerator, Parser::PAGE_UNIQ_VIEWS)
+    parsed_array = subject.parse(initial_enumerator, EntriesParser::PAGE_UNIQ_VIEWS)
 
     expect(parsed_array).to eq(expected_parsed_array_page_unique_views)
   end
 
   it 'returns empty page visits when initial array is empty' do
-    parsed_array = subject.parse([], Parser::PAGE_VISITS)
+    parsed_array = subject.parse([], EntriesParser::PAGE_VISITS)
 
     expect(parsed_array).to eq([])
   end
 
   it 'returns empty page unique views when initial array is empty' do
-    parsed_array = subject.parse([], Parser::PAGE_UNIQ_VIEWS)
+    parsed_array = subject.parse([], EntriesParser::PAGE_UNIQ_VIEWS)
 
     expect(parsed_array).to eq([])
   end

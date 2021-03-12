@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # This Validator checks file for existing and emptiness
-class Validator
+class FileValidator
   def self.file_suitable?(file_path)
     is_suitable = true
     unless File.exist?(file_path)

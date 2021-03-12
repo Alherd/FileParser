@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require './lib/loader'
-require './lib/validator'
+require './lib/entries_loader'
+require './lib/file_validator'
 
-describe Loader do
+describe EntriesLoader do
   let(:correct_test_log) { 'spec/fixtures/test.log' }
   let(:incorrect_file_path) { 'spec/fixtures/unexisting_file.log' }
 
