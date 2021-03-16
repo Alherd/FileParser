@@ -5,6 +5,7 @@ require './lib/entries_loader'
 require './lib/entries_parser'
 require './lib/page_views_sorter'
 require './lib/console_display'
+require './lib/page_views_display_structure'
 
 # This class manages process of parsing and output file
 class LogManager
@@ -35,9 +36,10 @@ class LogManager
     log_entries_enumerator = entries_loader.load_entries_into_enumerator(file_path)
     parsed_log_entries_by_views = entries_parser.parse(log_entries_enumerator, parse_type)
     sorted_log_entries_by_views = page_views_sorter.sort(parsed_log_entries_by_views)
+    display_params_struct = PageViewsDisplayStructure.new(header: header,
+                                                          page_views: sorted_log_entries_by_views,
+                                                          description: parse_type)
 
-    ConsoleDisplay
-      .new(header: header, page_views_array: sorted_log_entries_by_views, description: parse_type)
-      .output
+    ConsoleDisplay.new(display_params_struct).output
   end
 end

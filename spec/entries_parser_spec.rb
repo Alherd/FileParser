@@ -22,13 +22,17 @@ describe EntriesParser do # rubocop:disable Metrics/BlockLength
   it 'checks correct page visits' do
     parsed_array = subject.parse(initial_enumerator, EntriesParser::PAGE_VISITS)
 
-    expect(parsed_array).to eq(expected_parsed_array_page_visits)
+    (0..parsed_array.count - 1).each do |i|
+      expect([parsed_array[i].page, parsed_array[i].views_count]).to eq(expected_parsed_array_page_visits[i])
+    end
   end
 
   it 'checks correct page unique views' do
     parsed_array = subject.parse(initial_enumerator, EntriesParser::PAGE_UNIQ_VIEWS)
 
-    expect(parsed_array).to eq(expected_parsed_array_page_unique_views)
+    (0..parsed_array.count - 1).each do |i|
+      expect([parsed_array[i].page, parsed_array[i].views_count]).to eq(expected_parsed_array_page_unique_views[i])
+    end
   end
 
   it 'returns empty page visits when initial array is empty' do

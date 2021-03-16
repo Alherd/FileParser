@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require './lib/log_entry'
+require './lib/page_views_counter'
 
 # This class parses array of entries to array with visits
 class EntriesParser
@@ -8,41 +9,46 @@ class EntriesParser
   PAGE_UNIQ_VIEWS = 'unique views'
 
   def initialize
-    @visits = []
+    @log_entries = []
   end
 
-  def parse(entries, parse_type)
-    load_visits(entries) if @visits.empty?
-    visits_grouped_by_urls ||= group_visits_by_urls
+  def parse(log_entries, parse_type)
+    load_log_entries(log_entries) if @log_entries.empty?
 
-    map_visits_by_parse_type(visits_grouped_by_urls, parse_type)
+    map_log_entries_by_parse_type(@log_entries, parse_type)
   end
 
   private
 
-  def load_visits(entries)
+  def load_log_entries(entries)
     entries.each do |entry|
       splitted_string = entry.split(' ')
       next unless splitted_string.count == 2
 
       url, ip = splitted_string
-      @visits << LogEntry.new(url: url, ip: ip)
+      @log_entries << LogEntry.new(url: url, ip: ip)
     end
+
+    group_log_entries_by_urls
   end
 
-  def map_visits_by_parse_type(visits_grouped_by_urls, parse_type)
+  def map_log_entries_by_parse_type(log_entries_grouped_by_urls, parse_type)
     case parse_type
     when PAGE_VISITS
-      visits_grouped_by_urls.map { |url, visits| [url, visits.count] }
+      log_entries_grouped_by_urls.map { |url, views| create_page_views_counter(url, views.count) }
     when PAGE_UNIQ_VIEWS
-      visits_grouped_by_urls.map { |url, visits| [url, visits.map(&:ip).uniq.count] }
+      log_entries_grouped_by_urls.map { |url, views| create_page_views_counter(url, views.map(&:ip).uniq.count) }
     else
       puts 'Unknown parse type'
       []
     end
   end
 
-  def group_visits_by_urls
-    @visits.group_by(&:url)
+  def create_page_views_counter(page, views_count)
+    PageViewsCounter.new(page: page, views_count: views_count)
+  end
+
+  def group_log_entries_by_urls
+    @log_entries = @log_entries.group_by(&:url)
   end
 end

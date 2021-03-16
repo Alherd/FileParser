@@ -2,24 +2,24 @@
 
 # This class defines type of string output
 class ConsoleDisplay
-  attr_reader :header, :page_views_array, :description
+  attr_reader :header, :page_views, :description
 
-  def initialize(header: '', page_views_array: [], description: '')
-    @header = header
-    @page_views_array = page_views_array
-    @description = description
+  def initialize(display_structure)
+    @header = display_structure.header
+    @page_views = display_structure.page_views
+    @description = display_structure.description
   end
 
   def output
-    puts build_string_to_output
+    puts "\n#{header}\n"
+    puts build_string_to_output.join("\n")
   end
 
   private
 
   def build_string_to_output
-    output = "\n#{header}\n"
-    page_views_array.each { |page, views_quantity| output += "#{page} #{views_quantity} #{description} \n" }
-
-    output
+    page_views.map do |page_view|
+      "#{page_view.page} #{page_view.views_count} #{description}"
+    end
   end
 end

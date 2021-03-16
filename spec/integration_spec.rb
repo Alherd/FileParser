@@ -6,13 +6,13 @@ describe 'Integration test' do
   let(:test_log_path) { 'spec/fixtures/test.log' }
   let(:result_page_visits) do
     "\nList of webpages with most page views ordered from most pages views to less page views\n" \
-    "/help_page/1 6 visits \n/home 3 visits \n/about/2 3 visits \n" \
-    "/index 3 visits \n/contact 3 visits \n/about 2 visits \n"
+    "/help_page/1 6 visits\n/home 3 visits\n/about/2 3 visits\n" \
+    "/index 3 visits\n/contact 3 visits\n/about 2 visits\n"
   end
   let(:result_page_uniq_views) do
     "\nList of webpages with most unique page views\n" \
-    "/help_page/1 5 unique views \n/home 3 unique views \n/index 3 unique views \n" \
-    "/about/2 2 unique views \n/about 2 unique views \n/contact 2 unique views \n"
+    "/help_page/1 5 unique views\n/home 3 unique views\n/index 3 unique views\n" \
+    "/about/2 2 unique views\n/about 2 unique views\n/contact 2 unique views\n"
   end
   let(:log_manager) { LogManager.new([test_log_path]) }
 
